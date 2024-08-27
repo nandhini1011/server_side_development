@@ -28,5 +28,5 @@ module.exports = {
     getProject,
     getAllProject,
     deleteProject,
-    updateProject
+    updateProject,
 }
