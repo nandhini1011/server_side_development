@@ -7,35 +7,15 @@ const app =express();
 //Define port
 const PORT = 8080
 
-app.get("/home",(req,res) => {
-    res.send("Welcome to the QuotesWorld.!!!");
-    console.log(req.method);
-});
+app.use((req, res, next) => {
+    console.log(req.path , req.method);
+    next();
+})
 
-app.get("/quotes",(req,res) => {
-    res.send("Display all Quotes.");
-    console.log(req.method);
-});
+//importing Router
+const dashboardRoutes = require('./routes/dashboardRoutes.js');
 
-app.get("/quotes/:id",(req,res) => {
-    res.send("Diaplay a Particular Quote.");
-    console.log(req.method);
-});
-
-app.post("/quotes",(req,res) => {
-    res.send("Save a New Quote.");
-    console.log(req.method);
-});
-
-app.patch("/quotes/:id",(req,res) => {
-    res.send("Edit a Particular Quote.");
-    console.log(req.method);
-});
-
-app.delete("/quotes/:id",(req,res) => {
-    res.send("Delete a Particular Quote.");
-    console.log(req.method);
-});
+app.use("/dashboard",dashboardRoutes);
 
 app.listen(PORT, () => {
     console.log(`Dashboard => listening to ${PORT}`);
